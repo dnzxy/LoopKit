@@ -207,6 +207,29 @@ public protocol AlertSoundVendor {
     func getSounds() -> [Alert.Sound]
 }
 
+/// An alert a device manager may issue, declared ahead of time so an app can list it before it fires.
+/// `interruptionLevel` must match the level the manager issues the alert with.
+public struct IssuableAlert: Equatable {
+    public let identifier: Alert.AlertIdentifier
+    public let interruptionLevel: Alert.InterruptionLevel
+    public let title: String
+
+    public init(identifier: Alert.AlertIdentifier, interruptionLevel: Alert.InterruptionLevel, title: String) {
+        self.identifier = identifier
+        self.interruptionLevel = interruptionLevel
+        self.title = title
+    }
+}
+
+public protocol IssuableAlertVendor {
+    /// Every alert this manager may issue. Empty if it issues none.
+    static var issuableAlerts: [IssuableAlert] { get }
+}
+
+public extension IssuableAlertVendor {
+    static var issuableAlerts: [IssuableAlert] { [] }
+}
+
 // MARK: Codable implementations
 
 extension Alert: Codable { }

@@ -23,7 +23,7 @@ public extension DeviceManagerDelegate {
     func deviceManager(_ manager: DeviceManager, recordAnalyticsEvent name: String, properties: [AnyHashable: Any]?) {}
 }
 
-public protocol DeviceManager: CustomDebugStringConvertible, AlertResponder, AlertSoundVendor, IssuableAlertVendor, Pluggable {
+public protocol DeviceManager: CustomDebugStringConvertible, AlertResponder, AlertSoundVendor, AlertCatalogVendor, Pluggable {
     typealias RawStateValue = [String: Any]
     
     /// A title describing this manager
